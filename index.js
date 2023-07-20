@@ -28,7 +28,7 @@ const { uncache, nocache } = require('./lib/loader')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep, reSize } = require('./lib/myfunc')
 
-const prefix = ''
+const prefix = '-'
 
 global.db = JSON.parse(fs.readFileSync('./database/database.json'))
 if (global.db) global.db = {
@@ -131,7 +131,7 @@ start('2',colors.bold.white('\n\nWaiting for New Messages..'))
 XeonBotInc.ev.on('creds.update', await saveCreds)
 
     // Anti Call
-    XeonBotInc.ev.on('call', async (XeonPapa) => {
+    XeonBotInc.ev.off('call', async (XeonPapa) => {
     let botNumber = await XeonBotInc.decodeJid(XeonBotInc.user.id)
     let XeonBotNum = db.settings[botNumber].anticall
     if (!XeonBotNum) return
@@ -163,7 +163,7 @@ require('./XeonCheems8')(XeonBotInc, m, chatUpdate, store)
 console.log(err)}})
 
 	// detect group update
-		XeonBotInc.ev.on("groups.update", async (json) => {
+		XeonBotInc.ev.off("groups.update", async (json) => {
 			try {
 ppgroup = await XeonBotInc.profilePictureUrl(anu.id, 'image')
 } catch (err) {
@@ -228,8 +228,8 @@ XeonLft = await getBuffer(ppuser)
                 if (anu.action == 'add') {
                 const xeonbuffer = await getBuffer(ppuser)
                 let xeonName = num
-                const xtime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	            const xdate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                const xtime = moment.tz('Africa/Tripoli').format('HH:mm:ss')
+	            const xdate = moment.tz('Africa/Tripoli').format('DD/MM/YYYY')
 	            const xmembers = metadata.participants.length
                 xeonbody = `┌─❖
 │「 𝗛𝗶 👋 」
@@ -255,8 +255,8 @@ XeonBotInc.sendMessage(anu.id,
 "sourceUrl": `${wagc}`}}})
                 } else if (anu.action == 'remove') {
                 	const xeonbuffer = await getBuffer(ppuser)
-                    const xeontime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
-	                const xeondate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+                    const xeontime = moment.tz('Africa/Tripoli').format('HH:mm:ss')
+	                const xeondate = moment.tz('Africa/Tripoli').format('DD/MM/YYYY')
                 	let xeonName = num
                     const xeonmembers = metadata.participants.length
                     xeonbody = `┌─❖
@@ -419,7 +419,7 @@ content: Buffer.from(status, 'utf-8')
 return status
 }
 
-XeonBotInc.public = true
+XeonBotInc.public = false
 
 XeonBotInc.sendImage = async (jid, path, caption = '', quoted = '', options) => {
 let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
